@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-button fill="clear" class="back-button" (click)="goBack()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title>
+      Checkout
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="cart_container">
+    <div class="item_header_container">
+      <div class="personal_info_container">
+        <div class="personal_info">
+          <ion-icon style="color: rgb(82 77 129);
+          font-size: 22px;
+          margin-top: -1%;" name="location"></ion-icon>
+          <div class="personal_info_2">
+            <div class="personal_info_3">
+              <P>{{personalInfo.name}}</P>
+              <p class="personal_info_lighter">+(60){{personalInfo.phoneNum}}</p>
+            </div>
+            <p class="personal_info_lighter">{{personalInfo.address}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="checkout_all_container">
+      </div>
+    </div>
+    <div class="cart_item_container_wrapper">
+      <div class="cart_item_container" *ngFor="let item of cartItem">
+        <div class="cart_item">
+          <div class="item_image_container">
+            <img [src]="item.picture">
+          </div>
+          <div class="info_container">
+            <div class="info_container_header">
+              <div class="product_name_wrapper">
+                <p>{{item.name}}</p>
+              </div>
+            </div>
+            <p class="brand">
+              {{item.brand}}
+            </p>
+            <div class="item_variation_container">
+              <div class="item_variation">
+                <p>Size:M</p>
+              </div>
+              <div class="item_variation" id="color_container">
+                <p>color:</p>
+                <div id="color"></div>
+              </div>
+              <div class="item_variation">
+                <p>QTY:{{item.quantity}}</p>
+              </div>
+            </div>
+            <div class="cart_container_footer">
+              <div class="pricing_container_item">
+                <p id="discounted_price">${{item.price}}</p>
+                <p id="ori_price">${{getOriginalPrice(item.price)}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer_container">
+      <div class="pricing_detail">
+        <p id="payment_detial">Payment Details</p>
+        <div class="pricing_container">
+          <p>Merchandise Subtotal</p>
+          <p>{{getMerchandiseTotal() | currency: '$'}}</p>
+        </div>
+        <div class="pricing_container">
+          <p>Shipping Subtotal (excl.sst) </p>
+          <p>$ 18.00</p>
+        </div>
+        <div class="pricing_container">
+          <p>Shipping Fee SST</p>
+          <p>$ 1.08</p>
+        </div>
+        <div class="pricing_container" id="total_payment">
+          <p>Total Payment </p>
+          <p>{{getTotal() | currency: '$'}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <div class="footer_button_container">
+    <div class="footer_price_wrapper">
+      <P> total</P>
+      <P id="footer_price"> {{getTotal() | currency: '$' }}</P>
+    </div>
+    <button id="footer_button" (click)="placeOrder()">
+      Place Order
+    </button>
+  </div>
+</ion-footer>
+
+<div *ngIf="checkoutSuccess" class="success-modal">
+  <div class="modal-content">
+    <h2>Checkout Successful!</h2>
+    <p>You’ll be redirected shortly.</p>
+  </div>
+</div>

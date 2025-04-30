@@ -1,0 +1,107 @@
+<ion-header collapse="fade">
+  <ion-toolbar class="custom-toolbar">
+    <ion-title>
+      Cart
+    </ion-title>
+    <!-- Back Button -->
+    <div class="cart_header">
+      <ion-button fill="clear" class="back-button" (click)="goBack()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" class="back-button">
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="cart_container">
+    <div class="item_header_container">
+      <div class="itemCount_container">
+        <h1>{{display_item.length}} item</h1>
+      </div>
+      <div class="checkout_all_container">
+        <ion-checkbox labelPlacement="end" [checked]="isAllSelected" (ionChange)="toggleAllSelection($event)">
+          <p style="    
+            padding-left: 2px;
+            font-size: 3.2vw;              
+            color: #e18d3a;">
+            CheckoutAll
+          </p>
+        </ion-checkbox>
+      </div>
+    </div>
+
+
+    <div class="cart_item_container" [ngClass]="{selected:check(item)}" (click)="addtoCheckOut(item)"
+      *ngFor="let item of display_item">
+      <div class="cart_item">
+        <div class="item_image_container">
+          <img [src]="item.picture">
+        </div>
+        <div class="info_container">
+          <div class="info_container_header">
+            <div class="product_name_wrapper">
+              <p>{{item.name}}</p>
+            </div>
+            <div class="delete_item" (click)="deleteItem(item.id,$event)">
+              <ion-icon style="color: rgba(160, 44, 44, 0.774);" name="trash-outline"></ion-icon>
+            </div>
+          </div>
+          <p class="brand">
+            {{item.brand}}
+          </p>
+          <div class="item_variation_container">
+            <div class="item_variation">
+              <p>Size:M</p>
+            </div>
+            <div class="item_variation" id="color_container">
+              <p>color:</p>
+              <div id="color"></div>
+            </div>
+            <div class="item_variation">
+              <p>QTY:{{item.quantity}}</p>
+            </div>
+          </div>
+          <div class="cart_container_footer">
+            <div class="quantity_contianer">
+              <div class="quantity_manipulator" id="minue" (click)="QuantityManipulating(item,-1,$event)">
+                <ion-icon name="remove-outline"></ion-icon>
+              </div>
+              <div class="item_quantity_container">
+                <p>{{item.quantity}}</p>
+              </div>
+              <div class="quantity_manipulator" id="plus" (click)="QuantityManipulating(item,1,$event)">
+                <ion-icon name="add-outline"></ion-icon>
+              </div>
+            </div>
+            <div class="pricing_container">
+              <p id="discounted_price">${{item.price}}</p>
+              <p id="ori_price">${{getOriginalPrice(item.price)}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer collapse="fade">
+  <div class="footer_container">
+    <div class="cart_overall_info">
+      <p id="footer_price">
+        {{getTotal() | currency :'$'}}
+      </p>
+      <p id="footer_selected_item">
+        {{tempCartList.length}} items
+      </p>
+    </div>
+    <div class="footer_button_container">
+      <button id="footer_button" (click)="NavigateToCheckOut()">
+        Checkout
+      </button>
+    </div>
+
+  </div>
+</ion-footer>

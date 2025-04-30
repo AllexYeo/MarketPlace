@@ -1,17 +1,82 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+<ion-header collapse="fade">
+  <ion-toolbar class="custom-toolbar">
+    <div class="header-row">
+      <!-- Back Button -->
+      <ion-button fill="clear" class="back-button" (click)="goBack()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <ion-icon name="search-outline" class="search-icon"></ion-icon>
+        <input style="font-size: 1.4vh;" type="text" placeholder="Men's Fashion" [(ngModel)]="searchQuery"
+          (ngModelChange)="searchProducts()" />
+      </div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="filters_selection_container">
+    <select class="selector" required>
+      <option value="" disabled selected>Filter</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+    <select class="selector" required>
+      <option value="" disabled selected>Ratings</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+    <select class="selector" required>
+      <option value="" disabled selected>Size</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+    <select class="selector" required>
+      <option value="" disabled selected>Colour</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+    <select class="selector" required>
+      <option value="" disabled selected>price</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+  </div>
+  <div class="scroll-container">
+    <div class="story" *ngFor="let category of categories">
+      <ion-avatar>
+        <img [src]="category.avatar" (click)="searchProductsBasedCategory(category.username)"/>
+      </ion-avatar>
+      <small class="username">{{ category.username }}</small>
+    </div>
+  </div>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <div class="grid-container">
+    <div class="product_section" *ngFor="let product of products">
+      <div class="product_image_container">
+        <img [src]="product.picture">
+        <div class="heart-container">
+          <ion-icon name="heart-outline" class="heart-icon"></ion-icon>
+        </div>
+      </div>
+
+      <div class="product_description">
+        <div class="overview-container">
+          <p id="brand">{{product.brand}}</p>
+          <img id="review_star" src="../../assets/star.png">
+          <p id="rating">{{product.rating}}</p>
+          <p id="rating_count">({{product.ratingCount}})</p>
+        </div>
+
+        <p id="product-name">{{product.name}}</p>
+
+        <div class="pricing_container">
+          <p id="discounted_price">${{product.price}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </ion-content>

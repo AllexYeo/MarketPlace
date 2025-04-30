@@ -1,0 +1,63 @@
+<ion-header >
+  <ion-toolbar class="custom-toolbar">
+    <ion-button fill="clear" class="back-button" (click)="goBack()">
+      <ion-icon style="color: rgb(82, 77, 129); " name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <ion-title>
+      My Purchases
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="cart_container">
+    <div class="cart_item_container_wrapper" *ngFor="let order of orderHistory">
+      <div class="order_statue_container">
+        <p>Completed</p>
+      </div>
+      <div class="cart_item_container" *ngFor="let item of order.productList">
+        <div class="cart_item">
+          <div class="item_image_container">
+            <img [src]="item.picture">
+          </div>
+          <div class="info_container">
+            <div class="info_container_header">
+              <div class="product_name_wrapper">
+                <p>{{item.name}}</p>
+              </div>
+            </div>
+            <p class="brand">
+              {{item.brand}}
+            </p>
+            <div class="item_variation_container">
+              <div class="item_variation">
+                <p>Size:M</p>
+              </div>
+              <div class="item_variation" id="color_container">
+                <p>color:</p>
+                <div id="color"></div>
+              </div>
+              <div class="item_variation">
+                <p>QTY:{{item.quantity}}</p>
+              </div>
+            </div>
+            <div class="cart_container_footer">
+              <div class="pricing_container">
+                <p id="discounted_price">${{item.price}}</p>
+                <p id="ori_price">${{getOriginalPrice(item.price)}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="total_price_container" id="total_payment">
+        <p>total {{getItemCount(order)}} item:</p>
+        <p>{{getTotal(order) | currency: '$'}}</p>
+      </div>
+      <div class="button_wrapper">
+        <button id="return_button">Refund/Return</button>
+        <button id="rate_button">Rate</button>
+      </div>
+    </div>
+  </div>
+</ion-content>

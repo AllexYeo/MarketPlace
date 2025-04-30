@@ -3,7 +3,6 @@
     <ion-title>
       Detail product
     </ion-title>
-
     <div class="header_container">
       <div class="back_container" (click)="goBack()">
         <ion-icon style="font-size: 23px;" name="chevron-back-outline"></ion-icon>
@@ -12,15 +11,14 @@
         <ion-icon style="font-size: 23px;" name="cart-outline"></ion-icon>
       </div>
     </div>
-
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen>
+<ion-content fullscreen scroll-y="false">
 
-  <div class="product_container">
+  <div class="product_container" *ngIf="products[0]">
     <div class="product_image_container">
-      <img [src]="products[0].Image">
+      <img class="product_image" [src]="products[0].picture">
     </div>
     <div class="product_detial_container">
       <div class="product_detail_row">
@@ -32,7 +30,7 @@
             width: 20px;
             aspect-ratio: 1/1;" src="../../assets/star.png">
           <p id="rating">{{products[0].rating}}</p>
-          <p id="rating_count">({{products[0].rating_count}})</p>
+          <p id="rating_count">({{products[0].ratingCount}})</p>
         </div>
         <ion-icon style="font-size: 6vw;" class="heart-icon" name="heart-outline"></ion-icon>
       </div>
@@ -42,7 +40,7 @@
         <p id="ori_price"> {{products[0].ori_price}}</p>
       </div>
       <p id="description">
-        {{products[0].describe}}
+        {{products[0]?.describe}}
       </p>
       <div class="selection_container">
         <div class="color_selection-container">
@@ -67,8 +65,11 @@
         </div>
       </div>
       <div class="button_container">
-        <ion-button class="button" id="add_to_chart">Outline</ion-button>
-        <ion-button class="button" id="buy_now">Outline</ion-button>
+        <ion-button class="button" id="add_to_chart" (click)="addToCart()">
+          <ion-icon style="margin-right: 2px;" name="cart-outline"></ion-icon>
+          <p class=>add to chart</p>
+        </ion-button>
+        <ion-button class="button" id="buy_now">buy now</ion-button>
       </div>
 
     </div>

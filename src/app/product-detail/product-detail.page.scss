@@ -3,32 +3,51 @@ toolbar-container {
     --background: #ffffff;
 }
 
-.custom-toolbar {
-    --background: #ffffff;
-    display: flex;
-    align-items: center;
-    padding: 0 2vw;
-    height: 50px;
-}
-
 .header_container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+.product_container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
+.custom-toolbar {
+    --background: #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    height: 50px;
+}
 
 * {
     color: black;
+    font-family: system-ui;
 }
+
 
 .product_detial_container {
     padding: 0 5%;
+    margin-bottom: 5%;
+}
+
+.product_image_container {
+    height: 57vh;
+}
+
+.product_image {
+    max-width: 100%;
+    width: 100%;
+    max-height: 98%;
 }
 
 .product_detail_row {
     padding-top: 1vh;
+    padding-bottom: 0.9vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -53,8 +72,9 @@ toolbar-container {
 #brand,
 #rating_count {
     color: rgb(113 113 113);
-    font-size: 3.5vw;
+    font-size: 2vh;
     padding-right: 3vw;
+    padding-left: 2px;
 }
 
 #rating_count {
@@ -76,10 +96,9 @@ toolbar-container {
 }
 
 #description {
-    padding: 3% 0;
+    padding: 8% 0;
     color: rgba(99, 99, 99, 0.925);
-    font-size: 3.8vw;
-    word-spacing: 4%;
+    font-size: 3.9vw;
 }
 
 #discounted_price {
@@ -126,10 +145,12 @@ toolbar-container {
     flex-direction: column;
 }
 
-.color-selection {
+.color-selection,
+.size-selection {
     display: flex;
     flex-direction: row;
     gap: 5%;
+    margin: 1vh 0;
 }
 
 .color1,
@@ -152,19 +173,15 @@ toolbar-container {
     background-color: rgb(59, 242, 255);
 }
 
-.size-selection {
-    display: flex;
-    flex-direction: row;
-    gap: 5%;
-}
+
 
 .size {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background-color: rgba(160, 160, 160, 0.589);
+    border: 0.2px solid #5c5c5c73;
+    background-color: rgba(196, 196, 196, 0.027);
     display: flex;
-    align-items: center;
     justify-content: center;
 }
 
@@ -175,6 +192,13 @@ toolbar-container {
 
 .button {
     flex: 1;
+    font-size: 3.2vw;
+}
+
+#add_to_chart {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 ion-button#add_to_chart {
