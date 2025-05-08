@@ -16,6 +16,7 @@ export class PurchaseHistoryPage implements OnInit {
   ngOnInit() {
 
     this.fetchOrderHistory();
+    this.fetAllOrderID();
 
   }
 
@@ -55,7 +56,27 @@ export class PurchaseHistoryPage implements OnInit {
   getItemCount(order: any) {
     return order.productList.length
     // console.log();
-    
+
   }
+
+  fetAllOrderID() {
+    firebase.database().ref('mkUsers').once("value")
+      .then(snapshot => {
+        const data = snapshot.val();
+        const items = Object.values(data) as any[];
+        console.log(items);
+        
+
+        items.forEach((item) => {
+          if (Array.isArray(item.cart)) {
+            console.log(item.cart);
+            item.cart.map((key: any, value: any) => {
+              console.log(key);
+            });
+          }
+        });
+      });
+  }
+
 
 }

@@ -66,6 +66,11 @@ export class Tab1Page {
     this.nav.navigateForward('cart')  
   }
 
+  seeAll()
+  {
+    this.nav.navigateForward("/tabs/tab3")
+  }
+
 }
 
 // filterProducts() {

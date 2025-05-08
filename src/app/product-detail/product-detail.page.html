@@ -65,14 +65,65 @@
         </div>
       </div>
       <div class="button_container">
-        <ion-button class="button" id="add_to_chart" (click)="addToCart()">
+        <ion-button class="button" id="add_to_chart" (click)="openModal('cart')">
           <ion-icon style="margin-right: 2px;" name="cart-outline"></ion-icon>
           <p class=>add to chart</p>
         </ion-button>
-        <ion-button class="button" id="buy_now">buy now</ion-button>
+        <ion-button class="button" id="buy_now" (click)="openModal('buy')">buy now</ion-button>
       </div>
 
     </div>
+    <ion-modal #productModal [isOpen]="isModalOpen" (didDismiss)="isModalOpen = false" [initialBreakpoint]="1"
+      [breakpoints]="[0, 1]">
+      <ng-template>
+        <div class="modal_outter_container">
+          <div class="modal_header_container">
+            <div class="modal_image_wrapper">
+              <img id="modal_image" [src]="products[0].picture">
+            </div>
+            <div class="modal_product_info">
+              <p id="voucher_p"> Voucher Applied</p>
+              <P id="offer_price">RM400.30</P>
+              <div class="modal_discount_price_wrapper">
+                <p id="modal_ori_price">RM500.20</p>
+                <div class="discounted_rate_container">
+                  <p>-31%</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
+          <div class="item_variation_container">
+            <div class="item_variation">
+              <p>Size:M</p>
+            </div>
+            <div class="item_variation" id="color_container">
+              <p>color:</p>
+              <div id="color"></div>
+            </div>
+          </div>
+          <div class="modal_quantity_container">
+            <p>Quantitty</p>
+
+            <div class="modal_quantity_selection_container">
+              <!-- <div class="quantity_manipulator" id="minue" (click)="QuantityManipulating(item,-1,$event)"> -->
+              <div class="quantity_manipulator" id="minue" (click)="quantityManipulating(-1)">
+                <ion-icon name="remove-outline"></ion-icon>
+              </div>
+              <div class="item_quantity_container">
+                <p>{{quantity}}</p>
+              </div>
+              <!-- <div class="quantity_manipulator" id="plus" (click)="QuantityManipulating(item,1,$event)"> -->
+              <div class="quantity_manipulator" id="plus" (click)="quantityManipulating(1)">
+                <ion-icon name="add-outline"></ion-icon>
+              </div>
+            </div>
+          </div>
+          <button class="add_to_cart_button " (click)="handleAction()">
+            {{modalPurpose === 'buy'? "Proceed to Checkout":"Add to chart"}}
+          </button>
+        </div>
+      </ng-template>
+    </ion-modal>
   </div>
 </ion-content>

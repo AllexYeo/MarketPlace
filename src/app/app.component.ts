@@ -25,6 +25,7 @@ export class AppComponent {
     this.fetchProductsFromFirebase();
   }
   uid = localStorage.getItem("test_uid") || ""
+
   async fetchUserId() {
     try {
       const userCredential = await firebase.auth().signInWithEmailAndPassword(

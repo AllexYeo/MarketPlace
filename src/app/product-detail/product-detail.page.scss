@@ -238,3 +238,150 @@ ion-button#buy_now {
     margin: 0;
     padding: 0;
 }
+
+
+// modal
+ion-modal {
+    --height: auto;
+}
+
+.modal_outter_container {
+    display: flex;
+    flex-direction: column;
+    padding: 3.5vw 3vw 2vh;
+}
+
+.modal_outter_container p {
+    margin: 0;
+    font-size: 1.7vh;
+}
+
+.modal_header_container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 6%;
+}
+
+.modal_image_wrapper {
+    height: 10vh;
+    width: 20vw;
+    border-radius: 25px;
+}
+
+#modal_image {
+    width: 100%;
+    object-fit: contain;
+    max-height: 100%;
+}
+
+#voucher_p,
+#offer_price {
+    color: #33527d;
+}
+
+#voucher_p {
+    font-size: 1.6vh;
+    font-weight: 500;
+}
+
+#offer_price {
+    font-size: 2.3vh;
+    font-weight: 700;
+}
+
+#modal_ori_price {
+    color: rgba(99, 99, 99, 0.925);
+    text-decoration: line-through;
+    font-size: 1.7vh;
+    font-weight: 600;
+}
+
+.discounted_rate_container {
+    padding: 2px;
+    background-color: rgb(242 217 231);
+    border-radius: 7px;
+    margin-left: 3%;
+}
+
+.discounted_rate_container p {
+    color: #ce0c55;
+    font-size: 1.6vh;
+    font-weight: 500;
+}
+
+.modal_discount_price_wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.item_variation_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5%;
+    font-size: 12.5px;
+    margin: 1vh 0;
+}
+
+.item_variation {
+    background-color: rgb(156 156 156 / 34%);
+    padding: 1vw 3vw;
+    border-radius: 24px;
+}
+
+#color_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 25%;
+}
+
+#color_container p {
+    padding-bottom: 4px;
+}
+
+#color {
+    width: 4vw;
+    aspect-ratio: 1 / 1;
+    background-color: rgb(173, 137, 89);
+    border-radius: 50%;
+}
+
+.modal_quantity_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+
+}
+
+.modal_quantity_selection_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    gap: 7%;
+    flex: 1;
+    font-size: 81%;
+    justify-content: flex-end;
+}
+
+.quantity_manipulator {
+    padding: 5%;
+    background-color: rgb(213 213 213 / 65%);
+    border-radius: 28%;
+    display: flex;
+}
+
+.add_to_cart_button {
+    padding: 14px 1px;
+    margin: 2vh 0 0 0;
+    border-radius: 9px;
+    background-color: #283b56;
+    color: white;
+    font-size: 1.7vh;
+}

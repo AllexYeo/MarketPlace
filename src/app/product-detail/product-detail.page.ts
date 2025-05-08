@@ -12,10 +12,13 @@ import { NavController } from '@ionic/angular';
 })
 export class ProductDetailPage implements OnInit {
   id = "";
+  modalPurpose: 'cart' | 'buy' = 'cart'
 
   products: any[] = [{ describe: 'Elevate your casual wardrobe with our Loose Fit Printed T-shirt. Crafted from premium cotton for maximum comfort, this relaxed-hit tee features.' }];
+  isModalOpen: boolean = false;
+  quantity:number = 0;
 
-  constructor(private activatedRoute: ActivatedRoute, private authService: AuthService, private nav:NavController) { }
+  constructor(private activatedRoute: ActivatedRoute, private authService: AuthService, private nav: NavController) { }
 
   ngOnInit() {
 
@@ -49,6 +52,32 @@ export class ProductDetailPage implements OnInit {
 
   viewCart() {
     this.nav.navigateForward("cart")
+  }
+
+  openModal(purpose: 'cart' | 'buy') {
+    this.quantity = 1;
+    this.modalPurpose = purpose;
+    this.isModalOpen = true;
+  }
+
+  handleAction() {
+    if (this.modalPurpose === "cart") {
+      // this.addToCart();
+      this.isModalOpen = false;
+      console.log('cart');
+      
+    }
+    else {
+      this.isModalOpen = false;
+      console.log('buy');
+      
+    }
+  }
+
+  quantityManipulating(number:number)
+  {
+    let newQuantity = this.quantity + number
+    this.quantity = newQuantity>=1? newQuantity:0
   }
 
   addToCart() {
