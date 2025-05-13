@@ -11,7 +11,6 @@ export class Tab2Page {
 
   constructor(private nav: NavController) {
 
-    console.error(localStorage.getItem("test_uid"))
   }
 
   products = [

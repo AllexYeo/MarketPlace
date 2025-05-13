@@ -25,6 +25,10 @@ const routes: Routes = [
   {
     path: 'purchase-history',
     loadChildren: () => import('./purchase-history/purchase-history.module').then( m => m.PurchaseHistoryPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   }
   
 ];

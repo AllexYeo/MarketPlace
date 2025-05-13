@@ -3,6 +3,8 @@ import firebase from 'firebase';
 import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute, TitleStrategy } from '@angular/router';
 import { ProductService } from '../product.service';
+import { EventInfoWrapper } from '@angular/core/event_dispatcher.d-DlbccpYq';
+import { __addDisposableResource } from 'tslib';
 
 @Component({
   selector: 'app-cart',
@@ -15,12 +17,13 @@ export class CartPage implements OnInit {
 
 
 
-  constructor(private nav:Router ,private activatedRoute: ActivatedRoute, private authService: AuthService, private productService: ProductService) { }
+  constructor(private nav: Router, private activatedRoute: ActivatedRoute, private authService: AuthService, private productService: ProductService) { }
 
   ngOnInit() {
 
     this.firebasePath = 'mkUsers/' + (localStorage.getItem("test_uid") || "") + "/cart/";
     this.fetchItem(this.firebasePath);
+    // this.displayAlluserCart();
 
 
   }
@@ -95,12 +98,11 @@ export class CartPage implements OnInit {
     return (this.tempCartList || []).reduce((a, b) => (a + (b['quantity'] * parseFloat(b['price']))), 0)
   }
 
-  QuantityManipulating(item:any, number:number, event:Event)
-  {
+  QuantityManipulating(item: any, number: number, event: Event) {
     event.stopPropagation();
 
     let newQuantity = item.quantity + number;
-    item.quantity = newQuantity>=0 ? newQuantity : 0;
+    item.quantity = newQuantity >= 0 ? newQuantity : 0;
   }
 
   check(item: any) {
@@ -144,16 +146,38 @@ export class CartPage implements OnInit {
         console.log("Error deletig:", error);
       })
   }
-  
-  NavigateToCheckOut()
-  {
-    this.nav.navigate(['/checkout'],{
-      state: {cartItem: this.tempCartList}
+
+  NavigateToCheckOut() {
+    this.nav.navigate(['/checkout'], {
+      state: { cartItem: this.tempCartList }
     });
 
     //add event handler when user select nothing
 
   }
 
+  AllCartId: any = []
+
+
+  displayAlluserCart() {
+    firebase.database().ref("mkUsers").once("value").then((snapshot) => {
+      Object.values(snapshot.val()).forEach((row: any) => {
+        console.log(Object.values(row.cart));
+
+        Object.entries(row.cart).forEach(([id, value]: any) => {
+
+          let exist = this.AllCartId.find((item: any) => item[0] === id) 
+          if (exist) {
+            exist[1] += value.quantity;
+          } else {
+            this.AllCartId.push([id, value.quantity]);
+          }
+        })  
+
+      })
+    })
+    console.log("allCartID:", this.AllCartId)
+  }
 }
+
 
